@@ -7,9 +7,9 @@ public class Wrist {
     private Gamepad gamepad;
     static private double pos_sample  = 0.525;
 
-    static private double pos_specimen = 0.45;
-    static private double pos_basket = 0.65;
-    static private double pos_drop  = 0.35;
+    static private double pos_specimen = 0.6;
+    static private double pos_basket = 0.45;
+    static private double pos_drop  = 0.3;
 
     public Wrist(Robot robot, Gamepad gamepad) {
         this.robot = robot;

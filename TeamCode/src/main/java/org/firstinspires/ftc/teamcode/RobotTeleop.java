@@ -37,6 +37,9 @@ private int cur = 1;
             DT.drive();
             DL.launchDrone();
             slider.operate();
+            //telemetry.addData("Ticks", robot.motorSlider.getCurrentPosition());
+            //telemetry.update();
+//            slider_pos();
             arm_wrist_operate();
             claw_operate();
             leds_operate();
@@ -46,18 +49,35 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-//            arm.setPosSample();
+            slider.LowBasket();
+            arm.setPosSpecimen();
             wrist.setPosSample();
         } else if (gamepad2.b) {
+            slider.LowChamber();
             arm.setPosSample();
             wrist.setPosDrop();
         } else if(gamepad2.y) {
+            slider.HighBasket();
             arm.setPosFold();
             wrist.setPosBasket();
         } else if(gamepad2.x) {
+            slider.HighChamber();
             wrist.setPosSpecimen();
         }
     }
+
+//    private void slider_pos() {
+//        if (gamepad2.dpad_up) {
+//            slider.LowBasket();
+//        } else if (gamepad2.dpad_down) {
+//            slider.LowChamber();
+//        } else if (gamepad2.dpad_left) {
+//            slider.HighBasket();
+//        } else if (gamepad2.dpad_right) {
+//            slider.HighChamber();
+//        }
+//
+//    }
 
     private void claw_operate() {
         if (gamepad2.left_trigger > 0.9) {

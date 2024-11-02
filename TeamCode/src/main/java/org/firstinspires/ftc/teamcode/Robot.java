@@ -49,10 +49,10 @@ public class Robot {
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
-        motorFL = hardwareMap.get(DcMotor.class, "front_left");
-        motorFR = hardwareMap.get(DcMotor.class, "front_right");
-        motorBL = hardwareMap.get(DcMotor.class, "back_left");
-        motorBR = hardwareMap.get(DcMotor.class, "back_right");
+        motorFL = hardwareMap.get(DcMotor.class, "leftFront");
+        motorFR = hardwareMap.get(DcMotor.class, "rightFront");
+        motorBL = hardwareMap.get(DcMotor.class, "leftRear");
+        motorBR = hardwareMap.get(DcMotor.class, "rightRear");
         motorSlider = hardwareMap.get(DcMotorEx.class, "sliders");
         //servoArm = hardwareMap.get(Servo.class, "arm");
         servoArm = hardwareMap.get(Servo.class, "arm");
