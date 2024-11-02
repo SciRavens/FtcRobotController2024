@@ -70,7 +70,7 @@ public class DriveTrain {
         log("SPEED2:", speeds[2]);
         log("SPEED3:", speeds[3]);
         //sampleDrive.setMotorPowers(double FL, double BL, double BR, double FR);
-        robot.sampleDrive.setMotorPowers(-speeds[0], -speeds[2], -speeds[3], -speeds[1]);
+        robot.sampleDrive.setMotorPowers(speeds[0], speeds[2], -speeds[3], -speeds[1]);
         /*
         robot.motorFL.setPower(speeds[0]);
         robot.motorFR.setPower(speeds[1]);
