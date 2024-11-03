@@ -37,4 +37,8 @@ public class Wrist {
         robot.servoWrist.setPosition(pos_drop);
     }
 
+    public void setPosAbsolute(double pos)
+    {
+        robot.servoWrist.setPosition(pos);
+    }
 }
