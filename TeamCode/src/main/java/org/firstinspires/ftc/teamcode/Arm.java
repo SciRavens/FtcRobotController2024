@@ -21,13 +21,16 @@ public class Arm {
         robot.servoArm.setPosition(pos_sample);
     }
 
-
     public void setPosFold() {
         robot.servoArm.setPosition(pos_folded);
     }
 
     public void setPosSpecimen() {
         robot.servoArm.setPosition(pos_specimen);
+    }
+
+    public void setPosAbsolute(double pos) {
+        robot.servoArm.setPosition(pos);
     }
 
 }

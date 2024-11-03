@@ -14,7 +14,6 @@ public class FarBlueAutonomous extends LinearOpMode {
     public Slider slider;
     public Arm arm;
     public Claw claw;
-    public AprilTag tag;
     public TgeDetection tge;
     String curAlliance = "red";
     public int zone = -1;
@@ -29,7 +28,7 @@ public class FarBlueAutonomous extends LinearOpMode {
         drive = robot.sampleDrive;
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot, gamepad2);
-        claw = new Claw(robot.servoCR, robot.claw_left_close,robot.claw_left_wide_close, robot.claw_left_open, robot.servoCL, robot.claw_right_close,  robot.claw_right_wide_close, robot.claw_right_open);
+        claw = new Claw(robot);
         leds = new Leds(robot);
         leds.setPattern(0);
 
@@ -40,7 +39,6 @@ public class FarBlueAutonomous extends LinearOpMode {
         claw.open();
         sleep(500);
 
-        //tag = new AprilTag(robot);
         tge = new TgeDetection(robot, "blue");
         buildBlueZone1Trajectory();
         buildBlueZone2Trajectory();
@@ -124,7 +122,7 @@ public class FarBlueAutonomous extends LinearOpMode {
                 .forward(72)
                 .strafeLeft(35.5)
                 .addTemporalMarker(() -> {
-                    slider.auton();
+                   // slider.auton();
                     sleep(1000);
                 })
                 .waitSeconds(0.5)
@@ -175,7 +173,7 @@ public class FarBlueAutonomous extends LinearOpMode {
                 .forward(70)
                 .strafeLeft(28.8)
                 .addTemporalMarker(() -> {
-                    slider.auton();
+                    //slider.auton();
                     sleep(1000);
                 })
                 .waitSeconds(0.5)
@@ -231,7 +229,7 @@ public class FarBlueAutonomous extends LinearOpMode {
                 .forward(72)
                 .strafeLeft(25.5)
                 .addTemporalMarker(() -> {
-                    slider.auton();
+                    //slider.auton();
                     sleep(1000);
                 })
                 .waitSeconds(0.5)

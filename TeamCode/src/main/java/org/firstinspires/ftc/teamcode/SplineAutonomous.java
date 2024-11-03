@@ -16,7 +16,6 @@ public class SplineAutonomous extends LinearOpMode {
     public Slider slider;
     public Arm arm;
     public Claw claw;
-    public AprilTag tag;
     public TgeDetection tge;
     String curAlliance = "red";
     public int zone = 2;
@@ -29,11 +28,10 @@ public class SplineAutonomous extends LinearOpMode {
         drive = robot.sampleDrive;
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot, gamepad2);
-        claw = new Claw(robot.servoCR, robot.claw_left_close,robot.claw_left_wide_close, robot.claw_left_open, robot.servoCL, robot.claw_right_close,  robot.claw_right_wide_close, robot.claw_right_open);
+        claw = new Claw(robot);
         leds = new Leds(robot);
         arm.setPosFold();
 
-        //tag = new AprilTag(robot);
         tge = new TgeDetection(robot, "red");
 
         buildBlueZone1Trajectory();
@@ -90,7 +88,7 @@ public class SplineAutonomous extends LinearOpMode {
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH) )
                 .splineTo(new Vector2d(52, 38),Math.toRadians(0))
                 .addTemporalMarker(() -> {
-                    slider.auton();
+                    //slider.auton();
                     sleep(1000);
                     claw.open();
                     arm.setPosFold();

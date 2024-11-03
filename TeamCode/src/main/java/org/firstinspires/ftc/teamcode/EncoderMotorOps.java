@@ -94,6 +94,7 @@ public class EncoderMotorOps {
     public void autoOp(int target)
     {
         cur_position = motor.getCurrentPosition();
+
         if (in_tolerance(cur_position, target)) {
             return;
         }
