@@ -7,7 +7,7 @@ public class Slider extends EncoderMotorOps {
     private Robot robot;
     private Gamepad gamepad;
     private double manual_speed_factor = 1.0;
-    static final private double auto_power = 1.0;
+    static final private double auto_power = 0.5;
     static final private int pos_max = 7800;
     static final private int pos_min = 0;
     private int pos_middle = 3900;
@@ -20,10 +20,10 @@ public class Slider extends EncoderMotorOps {
     private int rev_ticks = 250;
 
 
-    private int LowBasket_ticks = -1483;
-    private int LowChamber_ticks = -249;
-    private int HighBasket_ticks = -2843;
-    private int HighChamber_ticks = -1244;
+    private int LowBasket_ticks = 1483;
+    private int LowChamber_ticks = 249;
+    private int HighBasket_ticks = 2843;
+    private int HighChamber_ticks = 1244;
 
     public Slider(Robot robot, Gamepad gamepad)
     {
