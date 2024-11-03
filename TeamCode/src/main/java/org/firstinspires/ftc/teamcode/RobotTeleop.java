@@ -8,13 +8,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class RobotTeleop extends LinearOpMode {
     public Robot robot;
     public DriveTrain DT;
-    public DroneLauncher DL;
     public Slider slider;
     public Arm arm;
     public Wrist wrist;
     public Claw claw;
 
-    public Claw claw_wide;
     RevBlinkinLedDriver.BlinkinPattern pattern;
     Leds leds;
 private int cur = 1;
@@ -22,11 +20,10 @@ private int cur = 1;
     public void runOpMode() throws InterruptedException {
         robot = new Robot(hardwareMap, telemetry);
         DT = new DriveTrain(robot, gamepad1);
-        DL = new DroneLauncher(robot, gamepad1);
         slider = new Slider(robot, gamepad2);
         arm = new Arm(robot, gamepad2);
         wrist = new Wrist(robot, gamepad2);
-        claw = new Claw(robot.servoCR, robot.claw_left_close,robot.claw_left_wide_close, robot.claw_left_open, robot.servoCL, robot.claw_right_close,  robot.claw_right_wide_close, robot.claw_right_open);
+        claw = new Claw(robot);
 
         leds = new Leds(robot);
         leds.setPattern(0);
@@ -35,11 +32,7 @@ private int cur = 1;
         leds.setPattern(cur);
         while(opModeIsActive()) {
             DT.drive();
-            DL.launchDrone();
             slider.operate();
-            //telemetry.addData("Ticks", robot.motorSlider.getCurrentPosition());
-            //telemetry.update();
-//            slider_pos();
             arm_wrist_operate();
             claw_operate();
             leds_operate();
@@ -81,11 +74,11 @@ private int cur = 1;
 
     private void claw_operate() {
         if (gamepad2.left_trigger > 0.9) {
-            claw.close();
-        } else if (gamepad2.right_trigger > 0.9) {
-            claw.close_wide();
-        } else {
             claw.open();
+        } else if (gamepad2.right_trigger > 0.9) {
+            claw.open();
+        } else {
+            claw.close();
         }
     }
     private void leds_operate() {

@@ -11,15 +11,15 @@ public class Claw {
     double left_close_wide, right_close_wide;
 
 
-    public Claw(Servo servoLeft, double left_close, double left_close_wide, double left_open,  Servo servoRight, double right_close, double right_close_wide, double right_open) {
-        this.servoLeft = servoLeft;
-        this.left_close = left_close;
-        this.left_open = left_open;
-        this.servoRight = servoRight;
-        this.right_close = right_close;
-        this.right_open = right_open;
-        this.left_close_wide = left_close_wide;
-        this.right_close_wide = right_close_wide;
+    public Claw(Robot robot) {
+        this.servoLeft = robot.servoCL;
+        this.left_close = robot.claw_left_close;
+        this.left_open = robot.claw_left_open;
+        this.servoRight = robot.servoCR;
+        this.right_close = robot.claw_right_close;
+        this.right_open = robot.claw_right_open;
+        this.left_close_wide = robot.claw_left_wide_close;
+        this.right_close_wide = robot.claw_right_wide_close;
         servoLeft.setPosition(left_close);
         servoRight.setPosition(right_close);
     }

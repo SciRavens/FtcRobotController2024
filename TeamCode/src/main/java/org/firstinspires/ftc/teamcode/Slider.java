@@ -41,18 +41,22 @@ public class Slider extends EncoderMotorOps {
     public void HighChamber() {
         autoOp(HighChamber_ticks);
     }
-//    Move slider height to Low basket
-    public void auton() {
-        autoOp(pos_auton);
+
+    public void setPosAbsolute(int ticks) {
+        autoOp(ticks);
+        logUpdate();
+    }
+    public void fold() {
+        autoOp(0);
     }
 
-    public void fold() {
-        autoOp(pos_min);
+    public void controlOp(double power)
+    {
+        manualOp(power);
+        logUpdate();
     }
 
     public void operate() {
-        robot.telemetry.addData("Slider Ticks: ", robot.motorSlider.getCurrentPosition());
-        robot.telemetry.addData("Total Current", robot.motorSlider.getCurrentPosition());
         autoOpCompletionCheck();
         if (gamepad.dpad_down) {
             // Go to the bottom
