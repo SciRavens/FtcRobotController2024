@@ -50,30 +50,36 @@ private int cur = 1;
 
     private void slider_auto_pos(int target)
     {
+        double power = -0.5;
+        int cur_pos = robot.motorSlider.getCurrentPosition();
+
+        if (cur_pos > target) {
+            power = -power;
+        }
         robot.motorSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorSlider.setTargetPosition(target);
         robot.motorSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.motorSlider.setPower(-1.0);
+        robot.motorSlider.setPower(power);
         target_pos = target;
     }
     private void slider_operate() {
         if (gamepad2.dpad_up) {
-            slider_auto_pos(-300);
+            slider_auto_pos(300);
             inAutoOp = true;
         } else if (gamepad2.dpad_down) {
             slider_auto_pos(0);
             inAutoOp = true;
         } else if (gamepad2.dpad_left) {
-            slider_auto_pos(-600);
+            slider_auto_pos(600);
             inAutoOp = true;
         } else if (gamepad2.dpad_right) {
-            slider_auto_pos(-1000);
+            slider_auto_pos(1000);
             inAutoOp = true;
         } else if (gamepad2.left_stick_y != 0) {
-            slider.controlOp(gamepad2.left_stick_y);
+            //slider.controlOp(gamepad2.left_stick_y);
             inAutoOp = false;
         } else if (inAutoOp == false) {
-            slider.controlOp(0);
+            //slider.controlOp(0);
         }
         robot.telemetry.addData("Current Position: ", robot.motorSlider.getCurrentPosition());
         robot.telemetry.addData("Target Position: ", target_pos);

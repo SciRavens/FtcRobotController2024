@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class Wrist {
     private Robot robot;
     private Gamepad gamepad;
-    static private double pos_sample  = 0.525;
+    static private double pos_sample  = 0.5;
 
     static private double pos_specimen = 0.6;
     static private double pos_basket = 0.45;

@@ -42,19 +42,19 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-            slider.LowBasket();
+            //slider.LowBasket();
             arm.setPosSpecimen();
             wrist.setPosSample();
         } else if (gamepad2.b) {
-            slider.LowChamber();
+            //slider.LowChamber();
             arm.setPosSample();
             wrist.setPosDrop();
         } else if(gamepad2.y) {
-            slider.HighBasket();
+            //slider.HighBasket();
             arm.setPosFold();
             wrist.setPosBasket();
         } else if(gamepad2.x) {
-            slider.HighChamber();
+            //slider.HighChamber();
             wrist.setPosSpecimen();
         }
     }
