@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.apache.commons.math3.analysis.function.Floor;
+
 public class Slider extends EncoderMotorOps {
     private Robot robot;
     private Gamepad gamepad;
@@ -19,10 +21,10 @@ public class Slider extends EncoderMotorOps {
 
     private int rev_ticks = 250;
 
-
+    private int Floor_ticks = 0;
     private int LowBasket_ticks = 1483;
     private int LowChamber_ticks = 249;
-    private int HighBasket_ticks = 2843;
+    private int HighBasket_ticks = 1988;
     private int HighChamber_ticks = 1244;
 
     public Slider(Robot robot, Gamepad gamepad)
@@ -32,6 +34,7 @@ public class Slider extends EncoderMotorOps {
         this.gamepad = gamepad;
     }
 
+    public void Floor(){autoOp(Floor_ticks);}
     public void LowBasket() {autoOp(LowBasket_ticks);}
 //    Move slider height to Low basket
     public void LowChamber() {autoOp(LowChamber_ticks);}
