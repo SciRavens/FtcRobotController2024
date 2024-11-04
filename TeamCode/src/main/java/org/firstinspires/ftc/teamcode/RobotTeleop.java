@@ -34,6 +34,7 @@ private int cur = 1;
             DT.drive();
             slider.operate();
             arm_wrist_operate();
+            slider_pos();
             claw_operate();
             leds_operate();
         }
@@ -42,35 +43,38 @@ private int cur = 1;
     private void arm_wrist_operate()
     {
         if (gamepad2.a) {
-            //slider.LowBasket();
-            arm.setPosSpecimen();
-            wrist.setPosSample();
-        } else if (gamepad2.b) {
-            //slider.LowChamber();
+            //Sample pickup
             arm.setPosSample();
-            wrist.setPosDrop();
-        } else if(gamepad2.y) {
-            //slider.HighBasket();
-            arm.setPosFold();
-            wrist.setPosBasket();
-        } else if(gamepad2.x) {
-            //slider.HighChamber();
+            wrist.setPosSample();
+            slider.Floor();
+        } else if (gamepad2.b) {
+            //Specimen pickup
+            arm.setPosSpecimen();
             wrist.setPosSpecimen();
+        } else if(gamepad2.y) {
+            //Basket drop
+            arm.setPosBasket();
+            wrist.setPosBasket();
+            slider.HighBasket();
+        } else if(gamepad2.x) {
+            //Chamber
+            arm.setPosChamber();
+            wrist.setPosChamber();
+            slider.HighChamber();
         }
     }
 
-//    private void slider_pos() {
-//        if (gamepad2.dpad_up) {
-//            slider.LowBasket();
-//        } else if (gamepad2.dpad_down) {
-//            slider.LowChamber();
-//        } else if (gamepad2.dpad_left) {
-//            slider.HighBasket();
-//        } else if (gamepad2.dpad_right) {
-//            slider.HighChamber();
-//        }
-//
-//    }
+    private void slider_pos() {
+        if (gamepad2.dpad_up) {
+            arm.setPosBasket();
+            wrist.setPosBasket();
+            slider.LowBasket();
+        } else if (gamepad2.dpad_down) {
+            arm.setPosChamber();
+            wrist.setPosChamber();
+            slider.LowChamber();
+        }
+    }
 
     private void claw_operate() {
         if (gamepad2.left_trigger > 0.9) {

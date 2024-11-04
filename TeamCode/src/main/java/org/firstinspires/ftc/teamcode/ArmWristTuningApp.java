@@ -62,9 +62,7 @@ public class ArmWristTuningApp extends LinearOpMode {
         arm.setPosAbsolute(arm_cur_pos);
         //if (arm_cur_pos < 0.9)
          //   Log.e("FTC: ", "Inc:" + arm_inc + " Butt:" + buttonPressed + "cur: " + arm_cur_pos);
-        robot.telemetry.addData("Increment:", arm_inc);
-        robot.telemetry.addData("Button Pressed:", buttonPressed);
-        robot.telemetry.addData("Arm Current Value:", arm_cur_pos);
+         robot.telemetry.addData("Arm Current Value:", arm_cur_pos);
         robot.telemetry.update();
     }
     private void wrist_operate()

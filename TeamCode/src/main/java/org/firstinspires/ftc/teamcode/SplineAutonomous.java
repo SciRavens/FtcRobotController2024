@@ -30,7 +30,7 @@ public class SplineAutonomous extends LinearOpMode {
         arm = new Arm(robot, gamepad2);
         claw = new Claw(robot);
         leds = new Leds(robot);
-        arm.setPosFold();
+        arm.setPosBasket();
 
         tge = new TgeDetection(robot, "red");
 
@@ -91,7 +91,7 @@ public class SplineAutonomous extends LinearOpMode {
                     //slider.auton();
                     sleep(1000);
                     claw.open();
-                    arm.setPosFold();
+                    arm.setPosBasket();
                 })
 
                 .back(3)
