@@ -52,8 +52,8 @@ public class DriveTrain {
     }
 
     public void stopDrive() {
-        //sampleDrive.setMotorPowers(double FL, double BL, double BR, double FR);
-        robot.sampleDrive.setMotorPowers(0, 0, 0, 0);
+        //mDrive.setMotorPowers(double FL, double BL, double BR, double FR);
+        robot.mDrive.setMotorPowers(0, 0, 0, 0);
     }
 
     private void drive(double left_y, double left_x, double right_x, double speed_factor) {
@@ -69,8 +69,8 @@ public class DriveTrain {
         log("SPEED1:", speeds[1]);
         log("SPEED2:", speeds[2]);
         log("SPEED3:", speeds[3]);
-        //sampleDrive.setMotorPowers(double FL, double BL, double BR, double FR);
-        robot.sampleDrive.setMotorPowers(speeds[0], speeds[2], -speeds[3], -speeds[1]);
+        //mDrive.setMotorPowers(double FL, double BL, double BR, double FR);
+        robot.mDrive.setMotorPowers(speeds[0], speeds[2], -speeds[3], -speeds[1]);
         /*
         robot.motorFL.setPower(speeds[0]);
         robot.motorFR.setPower(speeds[1]);
@@ -104,7 +104,6 @@ public class DriveTrain {
         } else if (gamepad.dpad_right) {
             x = -0.36;
         }
-
         if (x == 0 && y == 0) {
             return;
         }
@@ -134,11 +133,11 @@ public class DriveTrain {
                 drive_normal();
             }
         } else if (gamepad.dpad_left) {
-            robot.sampleDrive.turn(Math.toRadians(90));
+            robot.mDrive.turn(Math.toRadians(90));
         } else if (gamepad.dpad_right) {
-            robot.sampleDrive.turn(Math.toRadians(-90));
+            robot.mDrive.turn(Math.toRadians(-90));
         } else if (gamepad.dpad_down || gamepad.dpad_up) {
-            robot.sampleDrive.turn(Math.toRadians(180));
+            robot.mDrive.turn(Math.toRadians(180));
             //drive_slow();
         } else {
             log("DriveTrain: StopDrive", 0.0);

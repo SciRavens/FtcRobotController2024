@@ -89,6 +89,8 @@ public class EncoderMotorOps {
         cur_position = motor.getCurrentPosition();
         motor.setPower(-power);
         cur_manual_power = -power;
+
+        robot.telemetry.addData("Slider Curr tick:", cur_position);
     }
 
     public void autoOp(int target)
