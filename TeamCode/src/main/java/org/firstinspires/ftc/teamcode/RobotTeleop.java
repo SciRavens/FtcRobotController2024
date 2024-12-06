@@ -12,6 +12,7 @@ public class RobotTeleop extends LinearOpMode {
     public Arm arm;
     public Wrist wrist;
     public Claw claw;
+    public ClawAngle clawAngle;
 
     RevBlinkinLedDriver.BlinkinPattern pattern;
     Leds leds;
@@ -21,60 +22,110 @@ private int cur = 1;
         robot = new Robot(hardwareMap, telemetry);
         DT = new DriveTrain(robot, gamepad1);
         slider = new Slider(robot, gamepad2);
-        arm = new Arm(robot, gamepad2);
-        wrist = new Wrist(robot, gamepad2);
+        arm = new Arm(robot);
+        wrist = new Wrist(robot);
         claw = new Claw(robot);
+        clawAngle = new ClawAngle(robot);
 
         leds = new Leds(robot);
         leds.setPattern(0);
-
+        arm.setPosStarting(false);
+        wrist.setPosStarting(false);
         waitForStart();
         leds.setPattern(cur);
         while(opModeIsActive()) {
             DT.drive();
-            slider.operate();
+            arm.operate();
+            wrist.operate();
+//            slider_operate();
+            slider_joystick();
             arm_wrist_operate();
-            slider_pos();
             claw_operate();
             leds_operate();
+            robot.telemetry.update();
         }
     }
 
     private void arm_wrist_operate()
     {
-        if (gamepad2.a) {
-            //Sample pickup
-            arm.setPosSample();
-            wrist.setPosSample();
-            slider.Floor();
-        } else if (gamepad2.b) {
-            //Specimen pickup
-            arm.setPosSpecimen();
-            wrist.setPosSpecimen();
-        } else if(gamepad2.y) {
-            //Basket drop
-            arm.setPosBasket();
-            wrist.setPosBasket();
-            slider.HighBasket();
+        if (gamepad2.dpad_down) {
+            arm.setPosSample(true);
+            wrist.setPosSample(true);
+            //arm.setSCTarget(robot.arm_pos_sample);
+            //wrist.setSCTarget(robot.wrist_pos_sample);
+        } else if (gamepad2.y) {
+            arm.setPosBasket(true);
+            wrist.setPosBasket(true);
+            //arm.setSCTarget(robot.arm_pos_basket);
+            //wrist.setSCTarget(robot.wrist_pos_basket);
         } else if(gamepad2.x) {
-            //Chamber
-            arm.setPosChamber();
-            wrist.setPosChamber();
+            arm.setPosStarting(false);
+            wrist.setPosStarting(false);
+            //arm.setSCTarget(robot.arm_pos_starting);
+            //wrist.setSCTarget(robot.wrist_pos_starting);
+        } else if(gamepad2.b) {
+            arm.setPosSpecimen(true);
+            wrist.setPosSpecimen(true);
+            //arm.setSCTarget(robot.arm_pos_specimen);
+            //wrist.setSCTarget(robot.wrist_pos_specimen);
+        }
+        else if(gamepad2.a){
+            arm.setPosSampleTwo(true);
+            wrist.setPosSampleTwo(true);
+            //arm.setSCTarget(robot.arm_pos_sample_two);
+            //wrist.setSCTarget(robot.wrist_pos_sample_two);
+        }
+        else if(gamepad2.dpad_up) {
+            // TBD: fix this
+            arm.setSCTarget(robot.arm_pos_chamber);
+            wrist.setSCTarget(robot.wrist_pos_high_chamber);
+        }
+        else if(gamepad2.dpad_right) {
+            clawAngle.setHorizontal();
+        }
+        else if(gamepad2.dpad_left) {
+            clawAngle.setVertical();
+        }
+    }
+
+
+
+    public void slider_operate() {
+        slider.autoOpCompletionCheck();
+        if (gamepad2.dpad_down) {
+            // Go to Low Chamber
+            slider.LowChamber();
+        } else if (gamepad2.dpad_up) {
+            // Go to High Basket
+            slider.HighBasket();
+        } else if  (gamepad2.dpad_right) {
+            // Move to Low Basket
+            slider.LowBasket();
+        } else if (gamepad2.dpad_left) {
+            // Move to High Chamber
             slider.HighChamber();
         }
     }
 
-    private void slider_pos() {
-        if (gamepad2.dpad_up) {
-            arm.setPosBasket();
-            wrist.setPosBasket();
-            slider.LowBasket();
-        } else if (gamepad2.dpad_down) {
-            arm.setPosChamber();
-            wrist.setPosChamber();
-            slider.LowChamber();
+    public void slider_joystick() {
+        if (gamepad2.left_stick_y != 0) {
+            slider.manualOp(gamepad2.left_stick_y);
+        } else {
+            slider.manualDefaultStop();
         }
     }
+    //    private void slider_pos() {
+//        if (gamepad2.dpad_up) {
+//            slider.LowBasket();
+//        } else if (gamepad2.dpad_down) {
+//            slider.LowChamber();
+//        } else if (gamepad2.dpad_left) {
+//            slider.HighBasket();
+//        } else if (gamepad2.dpad_right) {
+//            slider.HighChamber();
+//        }
+//
+//    }
 
     private void claw_operate() {
         if (gamepad2.left_trigger > 0.9) {

@@ -25,7 +25,7 @@ private int cur = 1;
         robot = new Robot(hardwareMap, telemetry);
         //DT = new DriveTrain(robot, gamepad1);
         //slider = new Slider(robot, gamepad2);
-        arm = new Arm(robot, gamepad2);
+        arm = new Arm(robot);
         //wrist = new Wrist(robot, gamepad2);
         //claw = new Claw(robot);
 
@@ -35,7 +35,7 @@ private int cur = 1;
         waitForStart();
         //leds.setPattern(cur);
         while(opModeIsActive()) {
-            //arm_operate();
+            arm_operate();
             slider_operate();
         }
     }
@@ -50,7 +50,7 @@ private int cur = 1;
 
     private void slider_auto_pos(int target)
     {
-        double power = -0.25;
+        double power = -0.5;
         int cur_pos = robot.motorSlider.getCurrentPosition();
 
         if (cur_pos > target) {
@@ -64,16 +64,16 @@ private int cur = 1;
     }
     private void slider_operate() {
         if (gamepad2.dpad_up) {
-            slider_auto_pos(1483);
+            slider_auto_pos(1670);
             inAutoOp = true;
         } else if (gamepad2.dpad_down) {
-            slider_auto_pos(249);
+            slider_auto_pos(504);
             inAutoOp = true;
         } else if (gamepad2.dpad_left) {
-            slider_auto_pos(2843);
+            slider_auto_pos(1008);
             inAutoOp = true;
         } else if (gamepad2.dpad_right) {
-            slider_auto_pos(1244);
+            slider_auto_pos(1000);
             inAutoOp = true;
         } else if (gamepad2.left_stick_y != 0) {
             //slider.controlOp(gamepad2.left_stick_y);
