@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @TeleOp(name = "SciRavens-TeleOp")
 public class RobotTeleop extends LinearOpMode {
@@ -13,6 +14,7 @@ public class RobotTeleop extends LinearOpMode {
     public Wrist wrist;
     public Claw claw;
     public ClawAngle clawAngle;
+    public DcMotorEx par0, par1, perp;
 
     RevBlinkinLedDriver.BlinkinPattern pattern;
     Leds leds;
@@ -26,6 +28,10 @@ private int cur = 1;
         wrist = new Wrist(robot);
         claw = new Claw(robot);
         clawAngle = new ClawAngle(robot);
+
+        par0 = hardwareMap.get(DcMotorEx.class, "rightFront");
+        par1 = hardwareMap.get(DcMotorEx.class, "leftRear");
+        perp = hardwareMap.get(DcMotorEx.class, "rightRear");
 
         leds = new Leds(robot);
         leds.setPattern(0);
@@ -42,6 +48,7 @@ private int cur = 1;
             arm_wrist_operate();
             claw_operate();
             leds_operate();
+            get_ticks();
             robot.telemetry.update();
         }
     }
@@ -114,6 +121,16 @@ private int cur = 1;
             slider.manualDefaultStop();
         }
     }
+
+
+    public void get_ticks() {
+
+        robot.telemetry.addData("rightFront ticks", par0.getCurrentPosition());
+        robot.telemetry.addData("leftRear ticks", par1.getCurrentPosition());
+        robot.telemetry.addData("rightRear ticks", perp.getCurrentPosition());
+        robot.telemetry.update();
+    }
+
     //    private void slider_pos() {
 //        if (gamepad2.dpad_up) {
 //            slider.LowBasket();
